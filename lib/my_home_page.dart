@@ -60,12 +60,12 @@ class _MyHomePageState extends State<MyHomePage> {
                       decoration: BoxDecoration(
                         color: message.isUser ? Colors.blue : Colors.grey[300],
                         borderRadius: message.isUser
-                            ? BorderRadius.only(
+                            ? const BorderRadius.only(
                                 topLeft: Radius.circular(20),
                                 bottomRight: Radius.circular(20),
                                 bottomLeft: Radius.circular(20),
                               )
-                            : BorderRadius.only(
+                            : const BorderRadius.only(
                                 topLeft: Radius.circular(20),
                                 bottomRight: Radius.circular(20),
                                 bottomLeft: Radius.circular(20),
