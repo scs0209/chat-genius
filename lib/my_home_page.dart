@@ -9,6 +9,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  final TextEditingController _controller = TextEditingController();
   final List<Message> _messages = [
     Message(text: "Hi", isUser: true),
     Message(text: "Hello, what's up", isUser: false),
@@ -59,7 +60,46 @@ class _MyHomePageState extends State<MyHomePage> {
               },
             ),
           ),
+
           // user input
+          Padding(
+            padding: const EdgeInsets.only(
+                bottom: 32, top: 16.0, left: 16.0, right: 16.0),
+            child: Container(
+              decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(32),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.5),
+                      spreadRadius: 5,
+                      blurRadius: 7,
+                      offset: Offset(0, 3),
+                    )
+                  ]),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: TextField(
+                      controller: _controller,
+                      decoration: InputDecoration(
+                        hintText: 'Write your messages',
+                        border: InputBorder.none,
+                        contentPadding: EdgeInsets.symmetric(horizontal: 20),
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    width: 8,
+                  ),
+                  IconButton(
+                    onPressed: () {},
+                    icon: Icon(Icons.send),
+                  ),
+                ],
+              ),
+            ),
+          ),
         ],
       ),
     );
