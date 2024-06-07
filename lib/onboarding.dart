@@ -52,14 +52,15 @@ class Onboarding extends StatelessWidget {
                   );
                 },
                 style: ElevatedButton.styleFrom(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30),
-                    ),
-                    padding: EdgeInsets.symmetric(
-                      vertical: 16,
-                      horizontal: 32,
-                    ),
-                    backgroundColor: Colors.blue[900]),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30),
+                  ),
+                  padding: EdgeInsets.symmetric(
+                    vertical: 16,
+                    horizontal: 32,
+                  ),
+                  backgroundColor: Colors.blue,
+                ),
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [

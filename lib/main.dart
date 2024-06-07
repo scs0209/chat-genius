@@ -1,5 +1,6 @@
 import 'package:chat_genius/my_home_page.dart';
 import 'package:chat_genius/onboarding.dart';
+import 'package:chat_genius/themes.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -13,6 +14,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
+      theme: darkMode,
+      darkTheme: darkMode,
       home: Onboarding(),
     );
   }
