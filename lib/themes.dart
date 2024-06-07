@@ -15,7 +15,7 @@ ThemeData lightMode = ThemeData(
   colorScheme: const ColorScheme.light(
     surface: Color(0xffffffff),
     primary: Color(0xff3369FF),
-    secondary: Color(0xffffffff),
+    secondary: Color(0xffEEEEEE),
   ),
   inputDecorationTheme: const InputDecorationTheme(
       labelStyle: TextStyle(
@@ -44,7 +44,7 @@ ThemeData darkMode = ThemeData(
   colorScheme: const ColorScheme.dark(
     surface: Color(0xff000000),
     primary: Color(0xff3369FF),
-    secondary: Color(0xffffffff),
+    secondary: Color(0xffEEEEEE),
   ),
   textTheme: const TextTheme(
     titleLarge: TextStyle(

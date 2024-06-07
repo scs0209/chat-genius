@@ -1,14 +1,16 @@
 import 'package:chat_genius/message.dart';
+import 'package:chat_genius/theme_notifier.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class MyHomePage extends StatefulWidget {
+class MyHomePage extends ConsumerStatefulWidget {
   const MyHomePage({Key? key}) : super(key: key);
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  ConsumerState<MyHomePage> createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _MyHomePageState extends ConsumerState<MyHomePage> {
   final TextEditingController _controller = TextEditingController();
   final List<Message> _messages = [
     Message(text: "Hi", isUser: true),
@@ -40,7 +42,15 @@ class _MyHomePageState extends State<MyHomePage> {
                 )
               ],
             ),
-            Image.asset('assets/volume-high.png', color: Colors.blue[800])
+            GestureDetector(
+              child: Image.asset(
+                'assets/volume-high.png',
+                color: Colors.blue[800],
+              ),
+              onTap: () {
+                ref.read(themeProvider.notifier).toggleTheme();
+              },
+            )
           ],
         ),
       ),
