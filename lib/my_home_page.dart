@@ -18,9 +18,23 @@ class _MyHomePageState extends ConsumerState<MyHomePage> {
     Message(text: "Great and you?", isUser: true),
     Message(text: "I'm excellent ", isUser: false),
   ];
+  // ThemeMode currentTheme = ThemeMode.light;
+
+  // @override
+  // void initState() {
+  //   getCurrentTheme();
+  //   super.initState();
+  // }
+
+  // getCurrentTheme() {
+  //   currentTheme = ref.read(themeProvider);
+  //   print("current theme mode: $currentTheme");
+  // }
 
   @override
   Widget build(BuildContext context) {
+    final currentTheme = ref.watch(themeProvider);
+
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: AppBar(
@@ -43,10 +57,15 @@ class _MyHomePageState extends ConsumerState<MyHomePage> {
               ],
             ),
             GestureDetector(
-              child: Image.asset(
-                'assets/volume-high.png',
-                color: Colors.blue[800],
-              ),
+              child: currentTheme == ThemeMode.dark
+                  ? Icon(
+                      Icons.light_mode,
+                      color: Theme.of(context).colorScheme.secondary,
+                    )
+                  : const Icon(
+                      Icons.dark_mode,
+                      color: Colors.black54,
+                    ),
               onTap: () {
                 ref.read(themeProvider.notifier).toggleTheme();
               },
