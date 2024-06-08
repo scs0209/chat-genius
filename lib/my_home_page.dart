@@ -1,7 +1,10 @@
 import 'package:chat_genius/message.dart';
 import 'package:chat_genius/theme_notifier.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:google_generative_ai/google_generative_ai.dart';
 
 class MyHomePage extends ConsumerStatefulWidget {
   const MyHomePage({Key? key}) : super(key: key);
@@ -12,12 +15,31 @@ class MyHomePage extends ConsumerStatefulWidget {
 
 class _MyHomePageState extends ConsumerState<MyHomePage> {
   final TextEditingController _controller = TextEditingController();
-  final List<Message> _messages = [
-    Message(text: "Hi", isUser: true),
-    Message(text: "Hello, what's up", isUser: false),
-    Message(text: "Great and you?", isUser: true),
-    Message(text: "I'm excellent ", isUser: false),
-  ];
+  final List<Message> _messages = [];
+  bool _isLoading = false;
+
+  callGeminiModel() async {
+    try {
+      if (_controller.text.isNotEmpty) {
+        _messages.add(Message(text: _controller.text, isUser: true));
+        _isLoading = true;
+      }
+
+      final model = GenerativeModel(
+          model: 'gemini-pro', apiKey: dotenv.env['GOOGLE_API_KEY']!);
+      final prompt = _controller.text.trim();
+      final content = [Content.text(prompt)];
+      final response = await model.generateContent(content);
+
+      setState(() {
+        _messages.add(Message(text: response.text!, isUser: false));
+        _isLoading = false;
+      });
+      _controller.clear();
+    } catch (e) {
+      debugPrint("Error : $e");
+    }
+  }
   // ThemeMode currentTheme = ThemeMode.light;
 
   // @override
@@ -152,13 +174,22 @@ class _MyHomePageState extends ConsumerState<MyHomePage> {
                   SizedBox(
                     width: 8,
                   ),
-                  Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: GestureDetector(
-                      child: Image.asset('assets/send.png'),
-                      onTap: () {},
-                    ),
-                  )
+                  _isLoading
+                      ? Padding(
+                          padding: EdgeInsets.all(8),
+                          child: SizedBox(
+                            width: 20,
+                            height: 20,
+                            child: CircularProgressIndicator(),
+                          ),
+                        )
+                      : Padding(
+                          padding: const EdgeInsets.all(16.0),
+                          child: GestureDetector(
+                            child: Image.asset('assets/send.png'),
+                            onTap: callGeminiModel,
+                          ),
+                        )
                 ],
               ),
             ),
