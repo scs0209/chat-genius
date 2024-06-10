@@ -1,6 +1,5 @@
-import 'package:chat_genius/my_home_page.dart';
-import 'package:chat_genius/onboarding.dart';
-import 'package:chat_genius/theme_notifier.dart';
+import 'package:chat_genius/screen/onboarding_screen.dart';
+import 'package:chat_genius/provider/theme_notifier.dart';
 import 'package:chat_genius/themes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -26,7 +25,7 @@ class MyApp extends ConsumerWidget {
       theme: lightMode,
       darkTheme: darkMode,
       themeMode: themeMode,
-      home: Onboarding(),
+      home: const OnboardingScreen(),
     );
   }
 }
